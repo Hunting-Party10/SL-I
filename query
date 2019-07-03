@@ -1,0 +1,36 @@
+create database Order_Management33307;
+
+use Order_Management33307;
+
+create table customer( customer_id int not null auto_increment unique primary key, name varchar(20) not null, phone_no int not null unique, address varchar(20) );
+
+create table product( product_id int not null auto_increment primary key, prduct_name varchar(20) not null,stock int not null,cost int not null);
+
+create table category( category_id int not null primary key, name varchar(10) not null);
+
+alter table customer drop address;
+
+alter table customer add(city varchar(10), state varchar(10),locality varchar(10),houseno varchar(10));
+
+alter table customer modify city varchar(10) not null;
+
+alter table customer modify state varchar(10) not null;
+
+alter table customer modify locality varchar(10) not null;
+
+alter table customer modify houseno varchar(10) not null;
+
+alter table product add category_id int not null;
+
+alter table product add constraint fk_category_id foreign key(category_id) references category(category_id);
+
+create table test(id int);
+
+drop table test;
+
+create table Order_details(order_id int not null auto_increment primary key,price int not null,product_id int,customer_id int);
+
+alter table Order_details add constraint fk_product_id foreign key(product_id) references product(product_id);
+
+alter table Order_details add constraint fk_customer_id foreign key(customer_id) references customer(customer_id);
+
