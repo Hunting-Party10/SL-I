@@ -1,0 +1,30 @@
+insert into category(name) values('RTS');
+insert into category(name) values('Action');
+insert into category(name) values('Shooter');
+insert into category(name) values('Adventure');
+update category set category_id = 2 where category_id=8;
+update category set category_id = 3 where category_id=9;
+update category set category_id = 5 where category_id=11;
+select * from category
+select * from category where name like 'A%';
+insert into product values (1,'Call of Duty',21,3999,5); 
+insert into product values (2,'Hollow Knight',21,3999,6);
+insert into product values (3,'7 Kingdoms',10,1999,3);
+insert into product values (4,'Witcher 3',30,2599,1);
+insert into product values (5,'Civilization',20,6599,2);
+insert into product values (6,'Madden',30,1200,1);
+insert into product values (7,'Spiderman',30,1200,8);
+
+
+select * from Order_details where customer_id=1;
+
+select * from Order_details,customer,product where Order_details.customer_id=1 and Order_details.customer_id=customer.customer_id;
+
+select order_id,sum(quantity*cost) as Bill from Order_details,product where Order_details.product_id=product.product_id group by order_id; 
+
+select order_id,sum(quantity*cost) as Bill from Order_details,product where Order_details.product_id=product.product_id group by order_id desc;
+
+select name from customer where name like 'Ba%';
+
+select order_id, sum(quantity*cost) as Bill from Order_details,product where Order_details.product_id=product.product_id group by order_id order by bill desc limit 1;
+

@@ -1,0 +1,2 @@
+mysqldump -u root -p Order_Management33307 > file.sql
+sudo mysql -u root -p Order1< Order1.sql

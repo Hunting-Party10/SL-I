@@ -1,0 +1,2 @@
+ select * from customer where month(dob) = 02;
+
