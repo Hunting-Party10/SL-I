@@ -1,0 +1,6 @@
+create view Sales as select order_id,sum(quantity*cost) as Bill from Order_details,product where Order_details.product_id=product.product_id group by order_id; 
+
+select * from Sales where Bill>10000;
+
+insert into Order_details values (1,2,3,1,"2019-02-13");
+

@@ -28,3 +28,9 @@ select name from customer where name like 'Ba%';
 
 select order_id, sum(quantity*cost) as Bill from Order_details,product where Order_details.product_id=product.product_id group by order_id order by bill desc limit 1;
 
+select distinct Order_id,purchase_date from Order_details,customer where city like 'Pune' and purchase_date ='2019-02-13';
+
+ select O.order_id,O.Bill * 0.85 from (select order_id,sum(quantity*cost) as Bill from Order_details,product where Order_details.product_id=product.product_id group by order_id) as O where O.Bill>10000;
+
+
+delete from Order_details where order_id=1;

@@ -1,2 +1,17 @@
+
+
+select count(*) from customers;
+
+ select avg(B.bill) as Average_Bill from (select sum(quantity*cost) as Bill from Order_details,product where Order_details.product_id=product.product_id group by order_id) as B;
+
+select sum(B.bill) as Total_Bill from (select sum(quantity*cost) as Bill from Order_details,product where Order_details.product_id=product.product_id group by order_id) as B;
+
+select now();
+
  select * from customer where month(dob) = 02;
+ 
+select O.Order_id,quantity,P.product_name,P.category_id from  ,product as P,category as C where O.product_id = P.product_id and P.category_id = C.category_id;
+
+SELECT DATE_ADD(curdate(), INTERVAL 6 MONTH);
+SELECT DATE_ADD(curdate(), INTERVAL -6 MONTH);
 

@@ -27,6 +27,7 @@ CREATE TABLE `Order_details` (
   `quantity` int(11) DEFAULT NULL,
   `product_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
+  `purchase_date` date DEFAULT NULL,
   PRIMARY KEY (`order_id`,`product_id`,`customer_id`),
   KEY `fk_product_id` (`product_id`),
   KEY `fk_customer_id` (`customer_id`),
@@ -41,9 +42,22 @@ CREATE TABLE `Order_details` (
 
 LOCK TABLES `Order_details` WRITE;
 /*!40000 ALTER TABLE `Order_details` DISABLE KEYS */;
-INSERT INTO `Order_details` VALUES (1,1,1,1),(1,5,2,1),(2,1,3,2),(2,4,6,2);
+INSERT INTO `Order_details` VALUES (1,1,1,1,'2019-02-13'),(1,5,2,1,'2019-02-13'),(1,2,3,1,'2019-02-13'),(2,1,3,2,'2019-03-28'),(2,4,6,2,'2019-03-28');
 /*!40000 ALTER TABLE `Order_details` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `Sales`
+--
+
+DROP TABLE IF EXISTS `Sales`;
+/*!50001 DROP VIEW IF EXISTS `Sales`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `Sales` AS SELECT 
+ 1 AS `order_id`,
+ 1 AS `Bill`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `category`
@@ -129,6 +143,24 @@ LOCK TABLES `product` WRITE;
 INSERT INTO `product` VALUES (1,'Call of Duty',21,3999,5),(2,'Hollow Knight',21,3999,6),(3,'7 Kingdoms',10,1999,3),(4,'Witcher 3',30,2599,1),(5,'Civilization',20,6599,2),(6,'Madden',30,1200,1),(7,'Spiderman',30,1200,8);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `Sales`
+--
+
+/*!50001 DROP VIEW IF EXISTS `Sales`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Sales` AS select `Order_details`.`order_id` AS `order_id`,sum((`Order_details`.`quantity` * `product`.`cost`)) AS `Bill` from (`Order_details` join `product`) where (`Order_details`.`product_id` = `product`.`product_id`) group by `Order_details`.`order_id` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -139,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-17 13:07:44
+-- Dump completed on 2019-07-29 15:47:04

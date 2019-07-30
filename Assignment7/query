@@ -1,0 +1,7 @@
+select O.Order_id,quantity,P.product_name,P.category_id from Order_details as O,product as P,category as C where O.product_id = P.product_id and P.category_id = C.category_id and C.category_id in(1,6);
+
+
+select * from product where stock in(10,20,30);
+
+select product_name,cost from product where product.cost > (select cost from product where product_name like "Witcher 3");
+
