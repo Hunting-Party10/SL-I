@@ -1,0 +1,41 @@
+delimiter //
+create procedure getAllCustomer()
+begin
+select * from customer;
+end//
+
+delimiter ;
+
+
+delimiter //
+create procedure getrecordbyState(IN statename varchar(20))
+begin
+select * from customer where state=statename;
+end//
+
+
+call getrecordbyState('Maharastra');
+call getrecordbyState('goa');
+
+
+
+create procedure countbyState(in statename varchar(20),out total int) begin select count(*) into total from customer where state=statename; end//
+call countbyState('Maharastra',@total);
+
+
+
+
+ create function billclass(bill decimal(42,0)) returns varchar(10)
+    deterministic
+    begin
+    declare class varchar(10);
+    if bill > 10000 then
+   set class = 'Upper';
+    else
+    set class = 'Lower';
+    end if;
+    return (class);
+    end//
+    
+select order_id,Bill,billclass(Bill) from Sales;
+

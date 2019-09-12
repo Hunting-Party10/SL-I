@@ -4,3 +4,7 @@ select * from Sales where Bill>10000;
 
 insert into Order_details values (1,2,3,1,"2019-02-13");
 
+create view majorcustomer as select customer_id,name,phone_no from customer;
+
+
+update majorcustomer set name="Atharva" where customer_id = 1;
