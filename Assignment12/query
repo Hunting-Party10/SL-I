@@ -1,0 +1,47 @@
+db.createCollection('customer')
+
+db.createCollection('product')
+db.category.drop()
+db.createCollection('order_ledger')
+
+db.customer.insert({"first_name":'Atharva','last_name':'Joshi'})
+
+var customer_record = [
+	{"first_name":'Aditya','last_name':'Chaloo'},
+	{"first_name":'Prathamesh','last_name':'C'},
+	{"first_name":'Omkar','last_name':'Bail'},
+	];
+	
+	
+s.db.customer.insert(customer_record)
+
+db.customer.find()
+
+
+db.product.insertOne({"name":"Call of duty","price":NumberInt(3999),genre:'Action',stock:NumberInt(10)})
+db.product.insertOne({"name":"Dark Souls","price":NumberInt(1999),genre:['Action','RPG'],stock:NumberInt(20)})
+db.product.insertOne({"name":"Need For Speed","price":NumberInt(899),genre:['Racing'],stock:NumberInt(30)})
+db.product.insertOne({"name":"Witcher 3","price":NumberInt(2599),genre:['RPG','Adventure'],stock:NumberInt(15)})
+	
+db.createCollection("product",{validator: {required : ["name,"cost","genre","stock"],properties: {name: { $type: "string",description: "must be a string and is required"},cost: {$type: "int",minimum: 1,description:"must be an integer greater than 1 and is required"},genre:{$type: "string",},stock:{$type: "int",minimum: 0}}}})
+
+
+db.customer.remove({})
+
+db.product.remove({name:"Witcher 3"})	
+
+db.customer.remove({price: NumberInt(3999)})
+
+
+db.customer.updateOne({"first_name":"Atharva"},{$set:{contact_number:NumberLong(923213212),address: "Kalyaninagar,Pune"}})
+db.customer.updateOne({"first_name":"Aditya"},{$set:{contact_number:NumberLong(9324232),address: "Kalyaninagar , Pune"}})
+db.customer.updateOne({"first_name":"Prathamesh"},{$set:{contact_number:NumberLong(748329234),address: "PICT"}})
+db.customer.updateOne({"first_name":"Omkar"},{$set:{contact_number:NumberLong(8439423),address: "Pimpri"}})
+
+	
+	
+	
+	
+	
+	
+	

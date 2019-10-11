@@ -111,8 +111,53 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Atharva',1234567,'Pune','Maharastra','KLN','10','1998-02-10'),(2,'Alex',4567,'GOA','GOA','RVK','12K','2000-08-17'),(3,'Nesterov',6434,'Mumbai','Maharastra','Dadar','99C','1988-05-22'),(4,'Pawar',2927,'Dhule','Maharastra','MG','99C','1998-09-18'),(5,'Bail',256437,'Pune','Maharastra','Pimple','GN2','1999-11-02'),(6,'Chaloo',93232,'Pune','Maharastra','KP','KC22','1998-01-25');
+INSERT INTO `customer` VALUES (1,'Atharva',1234567,'Pune','Maharastra','KLN','10','1998-02-10'),(2,'Alex',4567,'GOA','GOA','RVK','12K','2000-08-17'),(3,'Nesterov',6434,'Mumbai','Maharastra','Dadar','99C','1988-05-22'),(4,'Pawar',2927,'Dhule','Maharastra','MG','99C','1998-09-18'),(5,'Bail',256437,'Pune','Maharastra','Pimple','GN2','1999-11-02');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 trigger after_customer_delete after delete on customer for each row begin insert into del_customer values (old.customer_id,old.name,old.phone_no,old.city,old.state,old.locality,old.houseno,old.dob); end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `del_customer`
+--
+
+DROP TABLE IF EXISTS `del_customer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `del_customer` (
+  `customer_id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(20) NOT NULL,
+  `phone_no` int(11) NOT NULL,
+  `city` varchar(10) NOT NULL,
+  `state` varchar(10) NOT NULL,
+  `locality` varchar(10) NOT NULL,
+  `houseno` varchar(10) NOT NULL,
+  `dob` date DEFAULT NULL,
+  PRIMARY KEY (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `del_customer`
+--
+
+LOCK TABLES `del_customer` WRITE;
+/*!40000 ALTER TABLE `del_customer` DISABLE KEYS */;
+INSERT INTO `del_customer` VALUES (6,'Chaloo',93232,'Pune','Maharastra','KP','KC22','1998-01-25');
+/*!40000 ALTER TABLE `del_customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -203,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-14 13:13:38
+-- Dump completed on 2019-08-28 12:40:52

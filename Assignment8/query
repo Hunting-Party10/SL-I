@@ -1,0 +1,2 @@
+create trigger after_customer_delete after delete on customer for each row begin insert into del_customer values (old.customer_id,old.name,old.phone_no,old.city,old.state,old.locality,old.houseno,old.dob); end//
+
